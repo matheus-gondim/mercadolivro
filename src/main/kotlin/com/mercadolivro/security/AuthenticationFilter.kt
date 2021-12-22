@@ -24,7 +24,7 @@ class AuthenticationFilter(
             val authToken = UsernamePasswordAuthenticationToken(id, dto.password)
             return authenticationManager.authenticate(authToken)
         }catch (ex: Exception) {
-            throw AuthenticationException("", "")
+            throw AuthenticationException("Falha ao autenticar", "999")
         }
     }
 

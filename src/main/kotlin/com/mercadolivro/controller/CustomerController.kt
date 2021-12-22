@@ -5,6 +5,7 @@ import com.mercadolivro.extension.toResponse
 import com.mercadolivro.controller.request.CreateCustomerDto
 import com.mercadolivro.controller.request.UpdateCustomerDto
 import com.mercadolivro.controller.response.CustomerResponse
+import com.mercadolivro.security.UserCanOnlyAccessTheirOwnResource
 import com.mercadolivro.service.CustomerService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
@@ -22,6 +23,7 @@ class CustomerController(
     }
 
     @GetMapping("/{id}")
+    @UserCanOnlyAccessTheirOwnResource
     fun findById(@PathVariable id: Int): CustomerResponse {
         return service.findById(id).toResponse()
     }
@@ -34,6 +36,7 @@ class CustomerController(
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @UserCanOnlyAccessTheirOwnResource
     fun update(
         @PathVariable id: Int,
         @RequestBody dto: UpdateCustomerDto,

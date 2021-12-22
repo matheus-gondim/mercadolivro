@@ -29,9 +29,9 @@ class AuthorizationFilter(
 
     private fun getAuthentication(token: String): UsernamePasswordAuthenticationToken {
         if (!jwtUtil.isValidToken(token)) throw AuthenticationException("", "")
-        val id = jwtUtil.getSubject(token)
-        val customer = authService.loadUserByUsername(id)
-        return UsernamePasswordAuthenticationToken(id, null, customer.authorities)
+        val subject = jwtUtil.getSubject(token)
+        val customer = authService.loadUserByUsername(subject)
+        return UsernamePasswordAuthenticationToken(customer, null, customer.authorities)
     }
 
 }
