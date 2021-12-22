@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  kotlin-spring:
+    image: postgres:alpine
+    ports:
+      - '5432:5432'
+    container_name: 'kotlin-spring-api'
+    restart: always
+    volumes:
+      - database:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=pguser
+      - POSTGRES_PASSWORD=pgpassword
+      - POSTGRES_DB=kotlin-spring-api
+
+volumes:
+  database:

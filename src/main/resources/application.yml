@@ -1,0 +1,22 @@
+spring:
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    hibernate:
+      ddl-auto: update
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://localhost:5432/kotlin-spring-api?createDatabaseIfNotExist=true
+    username: pguser
+    password: pgpassword
+  jackson:
+    default-property-inclusion: non_null
+
+jwt:
+  secret: db8428cd-c401-422f-a8fe-a4c80339f36f
+  expiration: 3600000
