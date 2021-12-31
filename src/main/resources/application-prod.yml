@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://localhost:5432/kotlin-spring-api-prod?createDatabaseIfNotExist=true
+    username: pguser
+    password: pgpassword
+
+jwt:
+  secret: db8428cd-c401-422f-a8fe-a4c80339f36f
+  expiration: 3600000
