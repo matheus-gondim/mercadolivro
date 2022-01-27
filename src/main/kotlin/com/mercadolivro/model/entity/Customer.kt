@@ -5,6 +5,7 @@ import com.mercadolivro.model.enum.Role
 import javax.persistence.*
 
 @Entity(name = "customers")
+@Table(name = "customers")
 data class Customer(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

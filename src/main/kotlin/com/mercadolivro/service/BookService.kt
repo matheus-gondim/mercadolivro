@@ -10,6 +10,7 @@ import com.mercadolivro.model.entity.Customer
 import com.mercadolivro.model.enum.BookStatus
 import com.mercadolivro.model.enum.Errors
 import com.mercadolivro.repository.BookRepository
+import com.mercadolivro.repository.CustomerRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
@@ -17,12 +18,13 @@ import org.springframework.stereotype.Service
 @Service
 class BookService(
     private val repository: BookRepository,
-    private val customerService: CustomerService
+    private val customerRepository: CustomerRepository,
 ) {
     fun create(dto: CreateBookDto) {
-        val customer = customerService.findById(dto.customerId)
-        val book = dto.toBook(customer)
-        repository.save(book)
+       customerRepository.findById(dto.customerId).ifPresent {
+           val book = dto.toBook(it)
+           repository.save(book)
+       }
     }
 
     fun find(pageable: Pageable): Page<Book> {

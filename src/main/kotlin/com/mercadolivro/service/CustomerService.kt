@@ -20,7 +20,7 @@ import javax.transaction.Transactional
 @Service
 class CustomerService(
     private val repository: CustomerRepository,
-    @NonNull @Lazy private val bookService: BookService,
+    private val bookService: BookService,
     private val bCrypt: BCryptPasswordEncoder
 ) {
 
@@ -45,7 +45,7 @@ class CustomerService(
     }
 
     fun update(id: Int, dto: UpdateCustomerDto) {
-        val customerSaved = findById(id)
+        val customerSaved = this.findById(id)
         val customer = dto.toCustomer(customerSaved)
         repository.save(customer)
     }
